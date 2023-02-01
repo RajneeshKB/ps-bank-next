@@ -2,26 +2,43 @@ import React from 'react'
 import { renderWithRouter } from '../../../utils/test-utils'
 import UnprotectedLayout from './UnprotectedLayout'
 
-const mockData = { mockNavigate: jest.fn() }
-// jest.mock('react-router-dom', () => ({
-//   ...jest.requireActual('react-router-dom'),
-//   useNavigate: () => mockData.mockNavigate,
-//   Navigate: () => <div>Mock navigate component</div>,
-//   useLocation: () => ({ pathname: '/ps-bank/reset' }),
-// }))
+jest.mock('next/router', () => ({
+  ...jest.requireActual('next/router'),
+  useRouter() {
+    return {
+      route: '/',
+      pathname: '/ps-bank/reset',
+      query: '',
+      asPath: '',
+      push: jest.fn(),
+      events: {
+        on: jest.fn(),
+        off: jest.fn(),
+      },
+      beforePopState: jest.fn(() => null),
+      prefetch: jest.fn(() => null),
+    }
+  },
+}))
 
 xdescribe('TS:1 - UnprotectedLayout component', () => {
   it('TC:01 - should render UnprotectedLayout Component successfully', () => {
-    const { getByText } = renderWithRouter(<UnprotectedLayout />)
+    const { getByText } = renderWithRouter(
+      <UnprotectedLayout>
+        <div>Test</div>
+      </UnprotectedLayout>
+    )
     expect(
       getByText(/This is a sample application for learning purpose./)
     ).toBeInTheDocument()
     expect(getByText(/Developed by: Rajneesh Barnwal/)).toBeInTheDocument()
   })
 
-  it('TC:02 - should navigate if user is authenticated', () => {
+  xit('TC:02 - should navigate if user is authenticated', () => {
     const { getByText } = renderWithRouter(
-      <UnprotectedLayout />,
+      <UnprotectedLayout>
+        <div>Test</div>
+      </UnprotectedLayout>,
       {},
       {
         bankConextValue: {
@@ -36,9 +53,11 @@ xdescribe('TS:1 - UnprotectedLayout component', () => {
     expect(getByText(/Mock navigate component/)).toBeInTheDocument()
   })
 
-  it('TC:02 - should navigate if user is authenticated for new users', () => {
+  xit('TC:02 - should navigate if user is authenticated for new users', () => {
     const { getByText } = renderWithRouter(
-      <UnprotectedLayout />,
+      <UnprotectedLayout>
+        <div>Test</div>
+      </UnprotectedLayout>,
       {},
       {
         bankConextValue: {

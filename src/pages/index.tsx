@@ -14,7 +14,7 @@ const CustomerDashboardStyles = {
   },
 }
 
-const Home: FC = () => {
+const CustomerDashboard: FC = () => {
   return (
     <>
       <Head>
@@ -33,4 +33,4 @@ const Home: FC = () => {
   )
 }
 
-export default Home
+export default CustomerDashboard
