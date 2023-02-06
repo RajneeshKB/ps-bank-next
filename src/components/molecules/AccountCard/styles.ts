@@ -1,5 +1,6 @@
 export const accountCardStyles = {
   cardContainer: {
+    width: '100%',
     backgroundColor: 'primary.main',
     color: 'primary.contrastText',
   },

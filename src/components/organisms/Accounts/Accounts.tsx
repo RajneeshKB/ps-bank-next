@@ -1,5 +1,13 @@
 import React, { FC } from 'react'
-import { Box, FormControlLabel, Stack, Switch, Typography } from '@mui/material'
+import {
+  Box,
+  FormControlLabel,
+  List,
+  ListItem,
+  Stack,
+  Switch,
+  Typography,
+} from '@mui/material'
 import { useRouter } from 'next/router'
 import { IS_BROWSER } from '@/utils'
 import { AccountCard } from '@/components/molecules/AccountCard'
@@ -40,18 +48,24 @@ const Accounts: FC<IAccountsProps> = ({ accountsData }) => {
         />
       </Stack>
       <Stack spacing={4}>
-        {accountList.map((account) => {
-          const { accountNumber, accountType } = account
-          return (
-            <AccountCard
-              key={`${accountType}_${accountNumber}`}
-              showBalance={showBalance}
-              customerName={customerName}
-              // eslint-disable-next-line react/jsx-props-no-spreading
-              {...account}
-            />
-          )
-        })}
+        <List disablePadding>
+          {accountList.map((account) => {
+            const { accountNumber, accountType } = account
+            return (
+              <ListItem
+                key={`${accountType}_${accountNumber}`}
+                sx={{ px: '0' }}
+              >
+                <AccountCard
+                  showBalance={showBalance}
+                  customerName={customerName}
+                  // eslint-disable-next-line react/jsx-props-no-spreading
+                  {...account}
+                />
+              </ListItem>
+            )
+          })}
+        </List>
       </Stack>
     </Box>
   )

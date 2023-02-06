@@ -1,5 +1,6 @@
 export const atmCardStyles = {
   cardContainer: {
+    width: '100%',
     // backgroundColor: 'primary.light',
     color: 'primary.contrastText',
   },

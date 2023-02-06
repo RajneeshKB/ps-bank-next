@@ -3,6 +3,8 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  List,
+  ListItem,
   Typography,
 } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
@@ -42,24 +44,27 @@ const CardsAccordian: FC<ICardsAccordianProps> = ({
       <AccordionDetails
         sx={{ display: 'flex', flexDirection: 'column', rowGap: '1.5rem' }}
       >
-        {cardData.map((card) => {
-          const key = isCreditCard
-            ? `credit_${card.creditCardNumber}`
-            : `debit_${card.activeDebitCard}`
-          return (
-            <AtmCard
-              key={key}
-              customerName={customerName}
-              cardNumber={
-                isCreditCard ? card.creditCardNumber : card.activeDebitCard
-              }
-              showDetails={showDetails}
-              isCreditCard={isCreditCard}
-              // eslint-disable-next-line react/jsx-props-no-spreading
-              {...card}
-            />
-          )
-        })}
+        <List>
+          {cardData.map((card) => {
+            const key = isCreditCard
+              ? `credit_${card.creditCardNumber}`
+              : `debit_${card.activeDebitCard}`
+            return (
+              <ListItem key={key} sx={{ px: '0' }}>
+                <AtmCard
+                  customerName={customerName}
+                  cardNumber={
+                    isCreditCard ? card.creditCardNumber : card.activeDebitCard
+                  }
+                  showDetails={showDetails}
+                  isCreditCard={isCreditCard}
+                  // eslint-disable-next-line react/jsx-props-no-spreading
+                  {...card}
+                />
+              </ListItem>
+            )
+          })}
+        </List>
       </AccordionDetails>
     </Accordion>
   )
